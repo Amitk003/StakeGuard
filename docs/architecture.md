@@ -30,12 +30,24 @@ A user enters a proposed bet. The app does the following steps in order:
   - config.py: reads settings from .env
   - engine.py: all the risk math (implied probability, EV, risk score)
   - flags.py: the rule-based checks (emotional words, stake size, odds)
-  - llm.py: talks to the LLM for explanations (coming later)
+  - llm.py: writes the plain-language explanation and safer alternative
   - safety.py: PII masking, refusal logic (coming later)
   - audit.py: the action log (coming later)
 - data/matches.csv: the synthetic match dataset
 - scripts/generate_matches.py: rebuilds the dataset
 - tests/: the automated tests
+
+## The AI layer (llm.py)
+
+The LLM only writes text. It never does math. It receives the calculated
+numbers and the raised flags, and returns three things as JSON:
+
+- summary: a plain-language risk explanation
+- safer_alternative: one concrete safer option
+- confidence: High, Medium, or Low
+
+If no API key is set, or the API call fails, the app falls back to clear
+template text built from the same numbers. The demo always works.
 
 ## The risk math (engine.py)
 

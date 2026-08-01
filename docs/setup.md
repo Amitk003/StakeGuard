@@ -49,8 +49,10 @@ packages the app needs.
 
 ## Step 4: Add your API key (optional)
 
-The app works without an API key for the risk math. The LLM explanation
-layer needs a key.
+The app works without an API key. All risk math runs in plain Python. The
+LLM layer writes nicer explanations, but it is not required: without a key
+(or if the API is down), StakeGuard uses built-in template text and still
+gives a full assessment.
 
 1. Copy the file `.env.example` and name the copy `.env`.
 2. Open `.env` and add your key.
