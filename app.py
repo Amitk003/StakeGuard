@@ -33,11 +33,69 @@ matches = data.load_matches()
 
 MARKETS = ["home_win", "draw", "away_win"]
 
-RISK_COLORS = {
-    "Low": "green",
-    "Medium": "orange",
-    "High": "red",
+RISK_BADGE_COLORS = {
+    "Low": "#16a34a",
+    "Medium": "#d97706",
+    "High": "#dc2626",
 }
+
+BADGE_CSS = """
+<style>
+.badge {
+    display: inline-block;
+    padding: 6px 18px;
+    border-radius: 999px;
+    color: white;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 0.02em;
+}
+</style>
+"""
+
+
+def risk_badge(label: str) -> str:
+    """Return an HTML risk badge with the label color."""
+    color = RISK_BADGE_COLORS.get(label, "#6b7280")
+    return f'<span class="badge" style="background:{color}">{label} risk</span>'
+
+
+def show_charts(assessment) -> None:
+    """Render EV and stake comparison charts."""
+    win_prob = assessment.win_probability
+    expected_profit = win_prob * assessment.stake * (assessment.odds - 1.0)
+    expected_loss = (1.0 - win_prob) * assessment.stake
+
+    ev_data = pd.DataFrame(
+        {
+            "Amount ($)": [
+                round(expected_profit, 2),
+                round(-expected_loss, 2),
+                round(assessment.expected_value, 2),
+            ]
+        },
+        index=["Expected profit", "Expected loss", "Net EV"],
+    )
+
+    bankroll = st.session_state.get("current_bankroll", 1000.0)
+    safe_stake = round(bankroll * 0.01, 2)
+    stake_compare = pd.DataFrame(
+        {
+            "Stake ($)": [
+                round(assessment.stake, 2),
+                safe_stake,
+            ]
+        },
+        index=["Proposed stake", "Safe stake (1% of bankroll)"],
+    )
+
+    col_chart1, col_chart2 = st.columns(2)
+    with col_chart1:
+        st.markdown("**Expected value breakdown**")
+        st.bar_chart(ev_data, height=220)
+    with col_chart2:
+        st.markdown("**Stake comparison**")
+        st.bar_chart(stake_compare, height=220)
 
 
 def show_action_log() -> None:
@@ -92,10 +150,13 @@ def render_assessment(assessment, note: str) -> None:
         note_provided=bool(note),
     )
 
+    st.markdown(BADGE_CSS, unsafe_allow_html=True)
     st.subheader("Risk assessment")
-    color = RISK_COLORS.get(assessment.risk_label, "gray")
-    st.markdown(f"### Risk label: :{color}[{assessment.risk_label}]")
+    st.markdown(risk_badge(assessment.risk_label), unsafe_allow_html=True)
     st.caption(f"Confidence: {conf}")
+
+    st.markdown("#### Risk score")
+    st.progress(min(assessment.risk_score / 100.0, 1.0))
 
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Expected value", f"${assessment.expected_value:.2f}")
@@ -121,6 +182,8 @@ def render_assessment(assessment, note: str) -> None:
     )
     st.dataframe(evidence, use_container_width=True, hide_index=True)
     st.caption(f"Head to head: {match['h2h_notes']}")
+
+    show_charts(assessment)
 
     if flags:
         st.markdown("### Warning signs")
