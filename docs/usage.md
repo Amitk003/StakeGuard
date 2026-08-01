@@ -48,3 +48,9 @@ Nothing is saved until you click one of these buttons.
 
 The sidebar shows the action log: every decision with its timestamp, risk
 label, and your choice. This is your record of how you bet.
+
+## Your mood note is private
+
+If you write a mood note, personal details like email addresses, phone
+numbers, and social handles are replaced with placeholders before anything
+is stored. The note stays private.

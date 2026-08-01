@@ -28,14 +28,35 @@ A user enters a proposed bet. The app does the following steps in order:
 - app.py: the Streamlit entry point. This is the web page.
 - src/stakeguard/: the logic package.
   - config.py: reads settings from .env
+  - data.py: loads the match dataset and looks up odds and probabilities
   - engine.py: all the risk math (implied probability, EV, risk score)
   - flags.py: the rule-based checks (emotional words, stake size, odds)
   - llm.py: writes the plain-language explanation and safer alternative
-  - safety.py: PII masking, refusal logic (coming later)
-  - audit.py: the action log (coming later)
+  - safety.py: PII masking for notes before they are logged
+  - audit.py: the timestamped action log (CSV)
 - data/matches.csv: the synthetic match dataset
 - scripts/generate_matches.py: rebuilds the dataset
 - tests/: the automated tests
+
+## The human gate (app.py)
+
+1. The user enters the match, market, odds, stake, bankroll, and an optional
+   mood note.
+2. The app calculates the assessment and shows the evidence table and any
+   warning signs.
+3. The user must click Approve, Reject, or Edit.
+4. Edit lets the user change the stake or market and re-assess.
+5. Only after a click is the decision written to the action log with a
+   timestamp.
+
+Nothing is logged automatically. The buttons are the only way to record a
+decision.
+
+## The action log (audit.py)
+
+Each row in action_log.csv holds: timestamp, match, market, odds, stake,
+risk label, confidence, decision (approved, rejected, edited), and a masked
+note. The file is created at runtime and is gitignored.
 
 ## The AI layer (llm.py)
 

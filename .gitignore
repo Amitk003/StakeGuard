@@ -16,6 +16,9 @@ build/
 .env.local
 .env.*.local
 
+# Runtime action log (user decisions, created when the app runs)
+action_log.csv
+
 # Memory folder - project brain, never pushed to GitHub
 memory/
 

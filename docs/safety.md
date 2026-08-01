@@ -42,3 +42,8 @@ possible cool-down suggestion. It can recommend "do not bet".
 
 Each assessment shows how confident the app is. The label depends on data
 quality and how complete the input is, not on guesswork.
+
+## 8. Edit before you commit
+
+The Edit button lets you change the stake or the market and see a new
+assessment. This supports better decisions before anything is approved.
