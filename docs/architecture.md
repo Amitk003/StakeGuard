@@ -1,6 +1,7 @@
 # How the app is built
 
 This page explains the parts of StakeGuard and how data moves through it.
+For a visual flow, see [the architecture diagram](diagram.md).
 
 ## The flow
 
