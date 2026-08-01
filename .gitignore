@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+dist/
+build/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Env files (never commit secrets)
+.env
+.env.local
+.env.*.local
+
+# Memory folder - project brain, never pushed to GitHub
+memory/
+
+# Internal documents
+Participant_Guide_Updated.pdf
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
