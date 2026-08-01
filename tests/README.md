@@ -14,5 +14,7 @@ pytest
   percent, risk score, risk label, full assessment)
 - test_flags.py: the rule-based checks (emotional language, oversized
   stake, poor value, high variance)
+- test_llm.py: the AI explanation layer (fallback without a key, JSON
+  parsing, confidence labels)
 
 More tests will be added as new logic modules are built.
