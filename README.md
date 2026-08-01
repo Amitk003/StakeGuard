@@ -89,6 +89,3 @@ data/                  Synthetic match dataset
 tests/                 Automated tests
 ```
 
-## License
-
-See the LICENSE file in this repository.

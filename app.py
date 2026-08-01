@@ -6,7 +6,6 @@ from stakeguard import __version__
 
 st.set_page_config(
     page_title="StakeGuard",
-    page_icon=":material/shield:",
     layout="wide",
 )
 

@@ -16,9 +16,9 @@ def api_key() -> str:
     return os.getenv("OPENAI_API_KEY", "")
 
 
-def base_url() -> str:
-    """Return the LLM base URL override, or an empty string if not set."""
-    return os.getenv("OPENAI_BASE_URL", "")
+def base_url() -> str | None:
+    """Return the LLM base URL override, or None if not set."""
+    return os.getenv("OPENAI_BASE_URL") or None
 
 
 def model() -> str:
