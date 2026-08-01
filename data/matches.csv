@@ -1,0 +1,15 @@
+match_id,home_team,away_team,home_odds,draw_odds,away_odds,home_win_prob,draw_prob,away_win_prob,home_form,away_form,h2h_notes
+M001,Northside FC,Southpark United,2.19,5.83,3.22,0.4863,0.183,0.3307,5/5,1/5,home unbeaten in the last 3
+M002,Riverside City,Eastfield Town,2.48,5.78,2.77,0.4297,0.1836,0.3867,2/5,5/5,first meeting between the sides
+M003,Kingston Rovers,Harborview Athletic,2.85,4.27,2.85,0.3773,0.2507,0.372,4/5,3/5,away won the last meeting
+M004,Westbrook Wanderers,Cedar Falls,2.96,3.6,3.08,0.3604,0.2949,0.3447,3/5,5/5,away won the last meeting
+M005,Maple Grove,Ironbridge FC,2.03,3.98,5.28,0.5299,0.2676,0.2026,5/5,3/5,high scoring recent meetings
+M006,Foxhill Eleven,Bayside Select,2.23,3.74,4.53,0.4808,0.2834,0.2358,2/5,3/5,home won the last 2 meetings
+M007,Grandview,Stonewall County,1.97,3.77,6.13,0.5424,0.284,0.1736,2/5,3/5,away won the last meeting
+M008,Lakeside Pride,Oakhurst FC,2.88,5.03,2.6,0.3745,0.212,0.4135,2/5,5/5,high scoring recent meetings
+M009,Silverton,Blue Ridge United,2.78,4.54,2.83,0.3837,0.2355,0.3809,2/5,3/5,home won the last 2 meetings
+M010,Pinecrest,Valley Athletic,2.81,5.78,2.44,0.3796,0.1839,0.4366,5/5,3/5,teams split the last 2 meetings
+M011,Northgate Nomads,Riverbend FC,2.21,4.67,3.78,0.4904,0.2275,0.2821,2/5,5/5,home unbeaten in the last 3
+M012,Sunrise City,Fairview SC,2.77,4.25,2.95,0.3883,0.2502,0.3615,2/5,5/5,first meeting between the sides
+M013,Cliffside,Meadowbrook United,3.09,5.75,2.28,0.3436,0.1857,0.4707,4/5,5/5,home won the last 2 meetings
+M014,Highland Park,Doverfield,2.55,4.24,3.24,0.42,0.2515,0.3285,1/5,1/5,high scoring recent meetings

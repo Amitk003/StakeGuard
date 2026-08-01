@@ -28,13 +28,34 @@ A user enters a proposed bet. The app does the following steps in order:
 - app.py: the Streamlit entry point. This is the web page.
 - src/stakeguard/: the logic package.
   - config.py: reads settings from .env
-  - engine.py: all the risk math (probability, EV, risk score)
-  - flags.py: the rule-based checks (emotional words, stake size)
-  - llm.py: talks to the LLM for explanations
-  - safety.py: PII masking, refusal logic
-  - audit.py: the action log
-- data/: the synthetic match dataset (CSV)
+  - engine.py: all the risk math (implied probability, EV, risk score)
+  - flags.py: the rule-based checks (emotional words, stake size, odds)
+  - llm.py: talks to the LLM for explanations (coming later)
+  - safety.py: PII masking, refusal logic (coming later)
+  - audit.py: the action log (coming later)
+- data/matches.csv: the synthetic match dataset
+- scripts/generate_matches.py: rebuilds the dataset
 - tests/: the automated tests
+
+## The risk math (engine.py)
+
+- implied probability = 1 / odds
+- expected value (EV) = win chance x profit - loss chance x stake
+- edge = win chance - implied probability
+- stake % of bankroll = stake / bankroll x 100
+- risk score (0 to 100) = stake size part (0-40) + bad edge part (0-35)
+  + stake pressure part (0-25)
+- risk label: under 30 is Low, under 60 is Medium, else High
+
+## The rule checks (flags.py)
+
+Every flag has a name and a reason so the evidence layer can show it:
+
+- emotional_language: tilt words in the mood note (chase, revenge, etc.)
+- oversized_stake: stake above 10% of the bankroll
+- poor_value: clearly negative edge (below -2%)
+- high_variance: long shot odds of 5.0 or higher
+
 
 ## Design rules
 
