@@ -69,8 +69,11 @@ Full instructions are in [docs/setup.md](docs/setup.md).
 - [Setup guide](docs/setup.md): install and run the app
 - [User guide](docs/usage.md): how to use StakeGuard
 - [Architecture](docs/architecture.md): how the app is built
+- [Architecture diagram](docs/diagram.md): visual flow of the app
 - [Data guide](docs/data.md): the match dataset
 - [Trust and safety](docs/safety.md): the safety features
+- [Disclosures](docs/disclosures.md): datasets and dependencies
+- [Launch checklist](docs/launch-checklist.md): ready-to-share checks
 
 ## The data
 
