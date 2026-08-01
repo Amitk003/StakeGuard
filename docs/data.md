@@ -1,0 +1,35 @@
+# Data guide
+
+This page explains the data StakeGuard uses.
+
+## The match dataset
+
+The app ships with a synthetic dataset of matches in `data/matches.csv`.
+Synthetic means the data was generated for this project, not collected from
+a real source. This keeps the app safe to run and free of licensing issues.
+
+Each row is one match and contains:
+
+- match_id: a short id like M001
+- home_team and away_team: the two teams
+- home_odds, draw_odds, away_odds: example bookmaker odds
+- home_win_prob, draw_prob, away_win_prob: a reasonable estimate of each
+  outcome's true probability
+- home_form and away_form: recent form as wins/losses, for example 3/5
+- h2h_notes: short head-to-head text, for example "home won last 2"
+
+## Why synthetic data
+
+- It is safe: no real personal data anywhere.
+- It is easy to demo: the app always has data to show.
+- It is honest: the README and this doc say the data is synthetic.
+
+## If a match is not in the dataset
+
+The app refuses to assess it. This is intentional. It says "not enough
+evidence" instead of guessing. This is part of the safety design.
+
+## Adding your own data
+
+You can add rows to `data/matches.csv` using the same column names. Keep the
+probabilities in the 0 to 1 range and keep odds above 1.0.
