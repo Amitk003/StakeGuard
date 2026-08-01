@@ -44,8 +44,10 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-This installs Streamlit (the web app), Pandas (data work), and the other
-packages the app needs.
+This installs Streamlit (the web app), Pandas (data work), the other
+packages the app needs, and StakeGuard itself as an editable package. The
+editable install is what makes `from stakeguard import ...` work when the
+app runs.
 
 ## Step 4: Add your API key (optional)
 
