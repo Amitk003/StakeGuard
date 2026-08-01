@@ -8,4 +8,11 @@ Run all tests with:
 pytest
 ```
 
-Tests will be added in later branches as the logic modules are built.
+## What is covered
+
+- test_engine.py: the risk math (implied probability, EV, edge, stake
+  percent, risk score, risk label, full assessment)
+- test_flags.py: the rule-based checks (emotional language, oversized
+  stake, poor value, high variance)
+
+More tests will be added as new logic modules are built.
