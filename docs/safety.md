@@ -40,8 +40,9 @@ possible cool-down suggestion. It can recommend "do not bet".
 
 ## 7. Confidence labels
 
-Each assessment shows how confident the app is. The label depends on data
-quality and how complete the input is, not on guesswork.
+Each assessment shows how confident the app is. The label is High, Medium,
+or Low and depends on data quality and how complete the input is, not on
+guesswork. A missing match or an unclear market lowers the confidence.
 
 ## 8. Edit before you commit
 

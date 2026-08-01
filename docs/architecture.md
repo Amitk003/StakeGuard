@@ -33,6 +33,7 @@ A user enters a proposed bet. The app does the following steps in order:
   - flags.py: the rule-based checks (emotional words, stake size, odds)
   - llm.py: writes the plain-language explanation and safer alternative
   - safety.py: PII masking for notes before they are logged
+  - evidence.py: confidence labels and refusal reasons
   - audit.py: the timestamped action log (CSV)
 - data/matches.csv: the synthetic match dataset
 - scripts/generate_matches.py: rebuilds the dataset
@@ -51,6 +52,21 @@ A user enters a proposed bet. The app does the following steps in order:
 
 Nothing is logged automatically. The buttons are the only way to record a
 decision.
+
+## Confidence labels (evidence.py)
+
+Every assessment carries a confidence label: High, Medium, or Low. It is
+based on data quality, not guesswork:
+
+- No match or no probability: Low
+- A match with a probability and no flags or note: High
+- One flag or a mood note: Medium
+- Two or more flags: Low
+
+## Refusal (evidence.py)
+
+When a match is not in the dataset or a market is not supported, the app
+says it cannot assess the bet. It never makes up an answer.
 
 ## The action log (audit.py)
 
