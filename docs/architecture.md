@@ -39,6 +39,14 @@ A user enters a proposed bet. The app does the following steps in order:
 - scripts/generate_matches.py: rebuilds the dataset
 - tests/: the automated tests
 
+## The interface (app.py)
+
+The interface shows a colored risk badge, a risk score bar, and two
+charts: an expected value breakdown (profit, loss, net EV) and a stake
+comparison (proposed stake vs a safe stake). Charts use Streamlit built-in
+bar charts, so no extra charting package is needed. The layout is
+responsive and works on phones.
+
 ## The human gate (app.py)
 
 1. The user enters the match, market, odds, stake, bankroll, and an optional

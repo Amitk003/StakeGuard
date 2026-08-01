@@ -27,10 +27,12 @@ The more honest the mood note, the better the advice.
 
 The app shows:
 
-- A risk label: Low, Medium, or High
+- A risk label: Low, Medium, or High (shown as a colored badge)
+- A risk score bar from 0 to 100
 - The expected value of the bet
 - The implied probability
-- The risk score and how it was calculated
+- Charts that break down the expected value and compare your stake
+  to a safe stake
 - The evidence: the source table and the numbers used
 - A plain-language explanation
 - A safer alternative, when one exists
