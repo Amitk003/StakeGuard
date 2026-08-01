@@ -14,6 +14,8 @@ import streamlit as st
 from stakeguard import __version__, data
 from stakeguard.audit import DecisionRecord, log_decision, now_iso, read_log
 from stakeguard.engine import RiskAssessment, assess_bet
+from stakeguard.evidence import confidence as confidence_label
+from stakeguard.evidence import refuse_reason
 from stakeguard.flags import collect_flags
 from stakeguard.llm import explain_bet
 from stakeguard.safety import mask_pii
@@ -79,10 +81,21 @@ def render_assessment(assessment, note: str) -> None:
     )
     explanation = explain_bet(assessment, flags)
     match = data.find_match(assessment.match_id, matches)
+    if match is None:
+        st.warning(refuse_reason(match_exists=False, market_supported=True))
+        return
+
+    conf = confidence_label(
+        has_match=True,
+        win_probability=assessment.win_probability,
+        flags_count=len(flags),
+        note_provided=bool(note),
+    )
 
     st.subheader("Risk assessment")
     color = RISK_COLORS.get(assessment.risk_label, "gray")
     st.markdown(f"### Risk label: :{color}[{assessment.risk_label}]")
+    st.caption(f"Confidence: {conf}")
 
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Expected value", f"${assessment.expected_value:.2f}")
@@ -101,10 +114,13 @@ def render_assessment(assessment, note: str) -> None:
                 "Est. win prob": assessment.win_probability,
                 "EV": assessment.expected_value,
                 "Edge": assessment.edge,
+                "Home form": match["home_form"],
+                "Away form": match["away_form"],
             }
         ]
     )
     st.dataframe(evidence, use_container_width=True, hide_index=True)
+    st.caption(f"Head to head: {match['h2h_notes']}")
 
     if flags:
         st.markdown("### Warning signs")
@@ -119,15 +135,14 @@ def render_assessment(assessment, note: str) -> None:
     st.markdown("### What the numbers mean")
     st.write(explanation.summary)
     st.info(f"Safer alternative: {explanation.safer_alternative}")
-    st.caption(f"Confidence: {explanation.confidence}")
 
     st.markdown("### Your decision")
     col_a, col_b, col_c = st.columns(3)
     if col_a.button("Approve", type="primary", key="btn_approve"):
-        _record_decision("approved", assessment, explanation.confidence, note)
+        _record_decision("approved", assessment, conf, note)
         st.rerun()
     if col_b.button("Reject", key="btn_reject"):
-        _record_decision("rejected", assessment, explanation.confidence, note)
+        _record_decision("rejected", assessment, conf, note)
         st.rerun()
     if col_c.button("Edit bet", key="btn_edit"):
         st.session_state["editing"] = True
